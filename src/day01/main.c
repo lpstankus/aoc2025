@@ -15,7 +15,7 @@ int part_one(String input)
   String it = input;
   for (String line = next_line(&it); it.len != 0; line = next_line(&it))
   {
-    int num = parse_int(SA_SLICE(line, 1, line.len));
+    int num = string_to_int(SA_SLICE(line, 1, line.len));
     switch (DA_GET(line, 0))
     {
     case 'L':
@@ -41,7 +41,7 @@ int part_two(String input)
   String it = input;
   for (String line = next_line(&it); line.len != 0; line = next_line(&it))
   {
-    int num = parse_int(SA_SLICE(line, 1, line.len));
+    int num = string_to_int(SA_SLICE(line, 1, line.len));
 
     while (num < 0 || 100 <= num)
     {
