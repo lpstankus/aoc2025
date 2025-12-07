@@ -1,6 +1,7 @@
 #pragma once
 
 #include "static_array.h"
+#include "types.h"
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -48,32 +49,32 @@ static inline void print_string(String string)
   SA_IT_VAL(string, val) printf("%c", val);
 }
 
-static inline int string_to_int(String string)
+static inline s32 string_to_s32(String string)
 {
   char ch = string.items[string.len];
   string.items[string.len] = 0;
-  int val = atoi(string.items);
+  s32 val = (s32)atoi(string.items);
   string.items[string.len] = ch;
   return val;
 }
 
-static inline long long string_to_longlong(String string)
+static inline s64 string_to_s64(String string)
 {
   char ch = string.items[string.len];
   string.items[string.len] = 0;
-  long long val = atoll(string.items);
+  s64 val = (s64)atoll(string.items);
   string.items[string.len] = ch;
   return val;
 }
 
-static inline String int_to_string(int val)
+static inline String s32_to_string(s32 val)
 {
   char buffer[20]; // Enough for a 64-bit integer
-  int len = snprintf(buffer, sizeof(buffer), "%d", val);
+  s32 len = (s32)snprintf(buffer, sizeof(buffer), "%d", val);
 
   String result = {
       .items = (char *)malloc(len + 1),
-      .len = len,
+      .len = (u64)len,
   };
 
   memcpy(result.items, buffer, len);
@@ -82,14 +83,14 @@ static inline String int_to_string(int val)
   return result;
 }
 
-static inline String longlong_to_string(long long val)
+static inline String s64_to_string(s64 val)
 {
   char buffer[20]; // Enough for a 64-bit integer
-  int len = snprintf(buffer, sizeof(buffer), "%lld", val);
+  s32 len = (s32)snprintf(buffer, sizeof(buffer), "%ld", val);
 
   String result = {
       .items = (char *)malloc(len + 1),
-      .len = len,
+      .len = (u64)len,
   };
 
   memcpy(result.items, buffer, len);

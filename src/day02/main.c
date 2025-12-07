@@ -1,10 +1,11 @@
 #include "../shared/files.h"
 #include "../shared/strings.h"
+#include "../shared/types.h"
 
 typedef struct
 {
-  long long lo;
-  long long hi;
+  s64 lo;
+  s64 hi;
 } Range;
 
 typedef DA_TYPE(Range) DA_RANGE;
@@ -17,8 +18,8 @@ DA_RANGE parse_input(String input)
   for (String range = next_split(&it, ','); range.len != 0;
        range = next_split(&it, ','))
   {
-    long long lo = string_to_longlong(next_split(&range, '-'));
-    long long hi = string_to_longlong(range);
+    s64 lo = string_to_s64(next_split(&range, '-'));
+    s64 hi = string_to_s64(range);
 
     Range val = {.lo = lo, .hi = hi};
     DA_APPEND(result, val);
@@ -27,9 +28,9 @@ DA_RANGE parse_input(String input)
   return result;
 }
 
-bool invalid_id_one(long id)
+bool invalid_id_one(s64 id)
 {
-  String id_str = longlong_to_string(id);
+  String id_str = s64_to_string(id);
 
   if (id_str.len % 2 != 0) return false;
 
@@ -39,15 +40,15 @@ bool invalid_id_one(long id)
   return string_equal(a, b);
 }
 
-long long part_one(String input)
+s64 part_one(String input)
 {
   DA_RANGE commands = parse_input(input);
 
-  long long ans = 0;
+  s64 ans = 0;
 
   DA_IT_VAL(commands, val)
   {
-    for (long long id = val.lo; id <= val.hi; id++)
+    for (s64 id = val.lo; id <= val.hi; id++)
     {
       if (invalid_id_one(id)) ans += id;
     }
@@ -56,17 +57,17 @@ long long part_one(String input)
   return ans;
 }
 
-bool invalid_id_two(long id)
+bool invalid_id_two(s64 id)
 {
-  String id_str = longlong_to_string(id);
-  for (int len = 1; len <= id_str.len / 2; len++)
+  String id_str = s64_to_string(id);
+  for (s64 len = 1; len <= id_str.len / 2; len++)
   {
     if (id_str.len % len != 0) continue;
 
     bool valid = false;
 
     String base = SA_SLICE(id_str, 0, len);
-    for (int ptr = len; ptr < id_str.len; ptr += len)
+    for (s64 ptr = len; ptr < id_str.len; ptr += len)
     {
       String test = SA_SLICE(id_str, ptr, ptr + len);
       if (!string_equal(base, test))
@@ -82,15 +83,15 @@ bool invalid_id_two(long id)
   return false;
 }
 
-long long part_two(String input)
+s64 part_two(String input)
 {
   DA_RANGE commands = parse_input(input);
 
-  long long ans = 0;
+  s64 ans = 0;
 
   DA_IT_VAL(commands, val)
   {
-    for (long long id = val.lo; id <= val.hi; id++)
+    for (s64 id = val.lo; id <= val.hi; id++)
     {
       if (invalid_id_two(id)) ans += id;
     }
@@ -105,12 +106,12 @@ int main()
   String input = read_entire_file("./src/day02/input.txt");
 
   printf("part one:\n");
-  printf("example -> %lld\n", part_one(example));
-  printf("input   -> %lld\n", part_one(input));
+  printf("example -> %ld\n", part_one(example));
+  printf("input   -> %ld\n", part_one(input));
 
   printf("part two:\n");
-  printf("example -> %lld\n", part_two(example));
-  printf("input   -> %lld\n", part_two(input));
+  printf("example -> %ld\n", part_two(example));
+  printf("input   -> %ld\n", part_two(input));
 
   return 0;
 }

@@ -1,21 +1,22 @@
 #include "../shared/files.h"
 #include "../shared/strings.h"
+#include "../shared/types.h"
 
-int modulo(int a, int b)
+s32 modulo(s32 a, s32 b)
 {
-  int result = a % b;
+  s32 result = a % b;
   return (result < 0) ? (result + b) : result;
 }
 
-int part_one(String input)
+s32 part_one(String input)
 {
-  int ans = 0;
-  int pointer = 50;
+  s32 ans = 0;
+  s32 pointer = 50;
 
   String it = input;
   for (String line = next_line(&it); it.len != 0; line = next_line(&it))
   {
-    int num = string_to_int(SA_SLICE(line, 1, line.len));
+    s32 num = string_to_s32(SA_SLICE(line, 1, line.len));
     switch (DA_GET(line, 0))
     {
     case 'L':
@@ -33,15 +34,15 @@ int part_one(String input)
   return ans;
 }
 
-int part_two(String input)
+s32 part_two(String input)
 {
-  int ans = 0;
-  int pointer = 50;
+  s32 ans = 0;
+  s32 pointer = 50;
 
   String it = input;
   for (String line = next_line(&it); line.len != 0; line = next_line(&it))
   {
-    int num = string_to_int(SA_SLICE(line, 1, line.len));
+    s32 num = string_to_s32(SA_SLICE(line, 1, line.len));
 
     while (num < 0 || 100 <= num)
     {

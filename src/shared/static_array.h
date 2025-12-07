@@ -1,6 +1,7 @@
 #pragma once
 
 #include "dynamic_array.h"
+#include "types.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,7 +10,7 @@
   struct                                                                       \
   {                                                                            \
     type *items;                                                               \
-    int len;                                                                   \
+    s64 len;                                                                   \
   }
 
 #define SA_GET(sa, idx)                                                        \
@@ -36,7 +37,7 @@
     slice;                                                                     \
   })
 
-#define SA_IT_IDX(sa, idx) for (int idx = 0; (idx) < ((sa).len); (idx)++)
+#define SA_IT_IDX(sa, idx) for (s64 idx = 0; (idx) < (s64)((sa).len); (idx)++)
 #define SA_IT_VAL(sa, val)                                                     \
   for (typeof(*(sa).items) val,                                                \
        *__ptr = (sa).items,                                                    \

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "static_array.h"
+#include "types.h"
 #include <assert.h>
 #include <stdlib.h>
 #include <string.h>
@@ -9,11 +10,11 @@
   struct                                                                       \
   {                                                                            \
     type *items;                                                               \
-    int len;                                                                   \
-    int cap;                                                                   \
+    s64 len;                                                                   \
+    s64 cap;                                                                   \
   }
 
-#define DA_IT_IDX(da, idx) for (int idx = 0; (idx) < ((da).len); (idx)++)
+#define DA_IT_IDX(da, idx) for (s64 idx = 0; (idx) < (s64)((da).len); (idx)++)
 #define DA_IT_VAL(da, val)                                                     \
   for (typeof(*(da).items) val,                                                \
        *__ptr = (da).items,                                                    \
