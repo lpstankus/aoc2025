@@ -1,16 +1,23 @@
-CC := gcc
-CFLAGS := -Wall -Wextra -std=gnu99 -O3
+ifeq ($(origin CC),default)
+CC := clang
+endif
+CFLAGS := -Wall -Wextra -std=c23 -O3
 
 DAYS := $(patsubst src/day%/main.c,%,$(wildcard src/day*/main.c))
 DAYS := $(sort $(DAYS))
 
-all: $(DAYS)
+all: $(addprefix day,$(DAYS))
+
+.SECONDARY: $(addprefix out/day,$(DAYS))
 
 out:
 	@mkdir -p $@
 
-day%: src/day%/main.c | out
-	$(CC) $(CFLAGS) $(CPPFLAGS) $< -o out/$@
+day%: out/day%
+	@:
+
+out/day%: src/day%/main.c $(wildcard src/shared/*.h) | out
+	$(CC) $(CFLAGS) $(CPPFLAGS) $< -o $@
 
 run-day%: day%
 	@out/$<

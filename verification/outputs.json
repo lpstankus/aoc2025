@@ -1,0 +1,22 @@
+{
+  "source_commit": "9a704130ff5a9944cc5b12c4714826bb2322b6d0",
+  "baseline_toolchain": "GCC 16.2.1 20260810, gnu99",
+  "notes": [
+    "Day04 is incomplete and fails to compile. It has no output snapshot and full verification returns nonzero."
+  ],
+  "fixtures": {
+    "src/day01/example.txt": "0a13f58bb3b2645d81ac469828a2b2fb57feb2d633ff2ff1fcc8f23528c88b56",
+    "src/day01/input.txt": "259fe80b2ec4f800c76a07c5a6f802e59cbb823ae20f7c76ba8522f6a4b8d5b1",
+    "src/day02/example.txt": "05e5b6bd2e17b536f1d1b49b9c12d180edfb38395de0895400a9cf8a1474d78c",
+    "src/day02/input.txt": "03ed6d73870e0e77f244609d6b1ad078b321e9c1d1d145f5dff4e5ea49fd3f6a",
+    "src/day03/example.txt": "d793653d3b83de6a2ce3f50acdab604b9e88775bfcced7d7ac7869d12b347d23",
+    "src/day03/input.txt": "fae37e39476d0cc6f1c60e670b3545d9c502fb488f2614bbb663ad0bad8ea7f0",
+    "src/day04/example.txt": "0e0e48e6681fb04a141cc2fde1f5fe46b9b714a1dbf7ce388bdf8c87364f8018",
+    "src/day04/input.txt": "d741ebb69c8e1958b80bc00f45922a17cb807226dafc75cd69dc8e3513869c60"
+  },
+  "outputs": {
+    "day01": "part one:\nexample => 3\ninput   => 1064\npart two:\nexample => 6\ninput   => 6122\n",
+    "day02": "part one:\nexample -> 1227775554\ninput   -> 19574776074\npart two:\nexample -> 4174379265\ninput   -> 25912654282\n",
+    "day03": "part one:\nexample -> 357\ninput   -> 17321\npart two:\nexample -> 3121910778619\ninput   -> 171989894144198\n"
+  }
+}
